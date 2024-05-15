@@ -51,7 +51,7 @@ async function createProduct(req, res) {
 async function getProductByName(req, res) {
     try {
         const { name } = req.params;
-        const result = await pool.query('SELECT * FROM products WHERE LOWER(name) LIKE = $1',  [`%${name.toLocaleLowerCase()}%`]);
+        const result = await pool.query('SELECT * FROM products WHERE LOWER(name) LIKE $1',  [`%${name.toLocaleLowerCase()}%`]);
         if (result.rowCount === 0) {
             res.status(404).json({ message: 'Produto não encontrado' });
         }
@@ -69,7 +69,7 @@ async function getProductByName(req, res) {
 async function getProductByType(req, res) {
     try {
         const { type } = req.params;
-        const result = await pool.query('SELECT * FROM products WHERE LOWER(type) LIKE = $1',  [`%${type.toLocaleLowerCase()}%`]);
+        const result = await pool.query('SELECT * FROM products WHERE LOWER(type) LIKE $1',  [`%${type.toLocaleLowerCase()}%`]);
         if (result.rowCount === 0) {
             res.status(404).json({ message: 'Produto não encontrado' });
         }
