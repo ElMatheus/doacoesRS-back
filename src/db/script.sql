@@ -17,6 +17,15 @@ CREATE TABLE products (
     current_quantity INT NOT NULL
 );
 
+CREATE TABLE donations(
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    donation_date DATE NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
 \\ products insomina :
 
 {
@@ -28,3 +37,14 @@ CREATE TABLE products (
   "current_quantity": 0
 }
 
+\\ donations insomina :
+
+{
+  "user_id": 1,
+  "donation_date": "2021-10-10",
+  "status": "pendente"
+}
+
+\\ users insert SQL :
+
+INSERT INTO users (name, email, password) VALUES ('Teste', 'Teste@gmail.com', 123456789);
