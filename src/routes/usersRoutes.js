@@ -8,7 +8,7 @@ router.get('/users/name/:name', usersController.getUserByName);
 router.post('/users', usersController.createUser);
 router.put('/users/:id', usersController.updateUser);
 router.delete('/users/:id', usersController.deleteUser);
-// router.post('/users/login', usersController.loginUser);
+router.post('/users/login', usersController.loginUser);
 // router.post('/users/refresh', usersController.refreshToken);
 
 module.exports = router;
