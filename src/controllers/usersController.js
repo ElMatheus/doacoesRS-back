@@ -3,9 +3,9 @@ const pool = require('../config/dbConfig');
 async function getAllUsers(req, res) {
   try {
     const result = await pool.query('SELECT * FROM users');
-    res.json({
+    return res.json({
       total: result.rowCount,
-      heroes: result.rows,
+      users: result.rows,
     });
   } catch (error) {
     console.error('Erro ao buscar usuarios', error);
@@ -18,9 +18,23 @@ async function getUserById(req, res) {
     const { id } = req.params;
     const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
     if (result.rowCount === 0) {
-      res.status(404).json({ message: 'Usuario não encontrado' });
+      return res.status(404).json({ message: 'Usuario não encontrado' });
     }
-    res.json(result.rows[0]);
+    return res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao buscar usuario', error);
+    res.status(500).send('Erro ao buscar usuario');
+  }
+}
+
+async function getUserByName(req, res) {
+  try {
+    const { name } = req.params;
+    const result = await pool.query('SELECT * FROM users WHERE name = $1', [name]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Usuario não encontrado' });
+    }
+    return res.json(result.rows[0]);
   } catch (error) {
     console.error('Erro ao buscar usuario', error);
     res.status(500).send('Erro ao buscar usuario');
@@ -29,48 +43,79 @@ async function getUserById(req, res) {
 
 async function createUser(req, res) {
   try {
-    const { name, power, hp, attack } = req.body;
-    const result = await pool.query('INSERT INTO heroes (name, level, power, hp, attack) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, 1, power, hp, attack]);
-    res.json({
-      message: "Heroi cadastrado com sucesso",
+    const { name, email, password } = req.body;
+    const result = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [name, email, password]);
+    return res.json({
+      message: "Usuario cadastrado com sucesso",
       users: result.rows[0],
     });
   } catch (error) {
-    console.error('Erro ao criar herois', error);
-    res.status(500).send('Erro ao criar herois');
+    console.error('Erro ao criar usuario', error);
+    res.status(500).send('Erro ao criar usuarios');
   }
 }
 
-async function updateHero(req, res) {
+async function updateUser(req, res) {
   try {
     const { id } = req.params;
-    const { name, power, hp, attack } = req.body;
-    const result = await pool.query('UPDATE heroes SET name = $1, power = $2, hp = $3, attack = $4 WHERE id = $5 RETURNING *', [name, power, hp, attack, id]);
+    const { name, email, password } = req.body;
+    const result = await pool.query('UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *', [name, email, password, id]);
     if (result.rowCount === 0) {
-      res.status(404).json({ message: 'Heroi não encontrado' });
+      return res.status(404).json({ message: 'Usuario não encontrado' });
     }
-    res.json({
-      message: "Heroi atualizado com sucesso",
+    return res.json({
+      message: "Usuario atualizado com sucesso",
       users: result.rows[0],
     });
   } catch (error) {
-    console.error('Erro ao atualizar heroi', error);
-    res.status(500).send('Erro ao atualizar heroi');
+    console.error('Erro ao atualizar usuario', error);
+    res.status(500).send('Erro ao atualizar usuario');
   }
 }
 
-async function deleteHero(req, res) {
+async function deleteUser(req, res) {
   try {
     const { id } = req.params;
-    const result = await pool.query('DELETE FROM heroes WHERE id = $1', [id]);
+    const result = await pool.query('DELETE FROM users WHERE id = $1', [id]);
     if (result.rowCount === 0) {
-      return res.status(404).json({ message: 'Heroi não encontrado' });
+      return res.status(404).json({ message: 'Usuario não encontrado' });
     }
-    res.json({ message: 'Heroi deletado com sucesso' });
+    return res.json({ message: 'Usuario deletado com sucesso' });
   } catch (error) {
-    console.error('Erro ao deletar heroi', error);
-    res.status(500).send('Erro ao deletar heroi');
+    console.error('Erro ao deletar usuario', error);
+    res.status(500).send('Erro ao deletar usuario');
   }
 }
 
-module.exports = { getAllHeroes, getHeroById, getHeroByName, createHero, updateHero, deleteHero };
+// async function loginUser(req, res) {
+//   try {
+//     const { name, password } = req.body;
+
+//     const user = await pool.query('SELECT * FROM users WHERE name = $1', [name]);
+
+//     if (!user) {
+//       return res.status(404).send({ message: "Usuário não encontrado" });
+//     }
+
+//     const passwordMatch = await compare(password, user.password);
+
+//     if (!passwordMatch) {
+//       return res.status(401).send({ message: "Nome ou senha inválidos" });
+//     }
+
+//     const token = sign({}, 'ca94e53c-e4e7-422a-9558-f32670cce6a5', {
+//       subject: user.id,
+//       expiresIn: '15m'
+//     });
+
+//     const generateRefreshToken = new Refresh(user.id);
+//     const refreshToken = await refreshRepository.createRefreshToken(generateRefreshToken);
+
+//     return res.status(200).send({ user, token: token, refreshToken });
+//   } catch (error) {
+//     return res.status(500).send({ message: "Erro ao realizar login", error: error.message });
+//   }
+// };
+    
+
+module.exports = { getAllUsers, getUserById, getUserByName, createUser, updateUser, deleteUser };

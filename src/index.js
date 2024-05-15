@@ -11,4 +11,4 @@ app.use('/', usersRoutes);
 
 app.listen(PORT, () => {
   console.log(`O servidor esta rodando na porta ${PORT}`);
-});
+}); 
