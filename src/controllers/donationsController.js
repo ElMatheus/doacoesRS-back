@@ -26,7 +26,7 @@ async function createDonation(req, res) {
         const donation_date = new Date();
         const user = await pool.query('SELECT * FROM users WHERE id = $1', [user_id]);
 
-        if (user.rowCount === 0) {
+        if (user.rowCount == 0) {
             console.error('Usuário não encontrado');
             res.status(404).send('Usuário não encontrado');
         }
@@ -43,8 +43,73 @@ async function createDonation(req, res) {
     }
 }
 
+async function getDonationById(req, res) {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('SELECT * FROM donations WHERE id = $1', [id]);
+
+        if (result.rowCount == 0) {
+            console.error('Doação não encontrada');
+            res.status(404).send('Doação não encontrada');
+        }
+
+        res.json({
+            message: "Doação encontrada",
+            donation: result.rows[0],
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar doação', error);
+        res.status(500).send('Erro ao buscar doação');
+    }
+}
+
+async function updateDonation(req, res) {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+        const result = await pool.query('UPDATE donations SET status = $1 WHERE id = $2 RETURNING *', [status, id]);
+
+        if (result.rowCount == 0) {
+            console.error('Doação não encontrada');
+            res.status(404).send('Doação não encontrada');
+        }
+
+        res.json({
+            message: "Doação atualizada com sucesso",
+            donations: result.rows[0],
+        });
+
+    } catch (error) {
+        console.error('Erro ao atualizar doação', error);
+        res.status(500).send('Erro ao atualizar doação');
+    }
+}
+
+async function deleteDonation(req, res) {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('DELETE FROM donations WHERE id = $1', [id]);
+
+        if (result.rowCount == 0) {
+            console.error('Doação não encontrada');
+            res.status(404).send('Doação não encontrada');
+        }
+
+        res.json({
+            message: "Doação deletada com sucesso",
+        });
+
+    } catch (error) {
+        console.error('Erro ao deletar doação', error);
+        res.status(500).send('Erro ao deletar doação');
+    }
+}
+
 module.exports = {
     getAllDonations,
-    // getDonationById,
-    createDonation
+    getDonationById,
+    createDonation,
+    updateDonation,
+    deleteDonation
 };
