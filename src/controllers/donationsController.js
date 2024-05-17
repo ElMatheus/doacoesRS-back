@@ -2,37 +2,20 @@ const pool = require('../config/dbConfig');
 
 async function getAllDonations(req, res) {
     try {
-        const result = await pool.query('SELECT * FROM donations');
+        const result = await pool.query('SELECT * FROM donations INNER JOIN users ON donations.user_id = users.id');
         res.json({
             status: 'success',
             message: 'Doações encontradas',
             total: result.rowCount,
             data: result.rows
         });
-    } catch (error) {
+    }
+    catch (error) { 
         console.error('Erro ao buscar doações', error);
         res.status(500).send('Erro ao buscar doações');
     }
 }
 
-async function getDonationById(req, res) {
-    try {
-        const { id } = req.params;
-        const result = await pool.query('SELECT * FROM donations WHERE id = $1', [id]);
-        if (result.rowCount == 0) {
-            res.status(404).json({ message: 'Doação não encontrada' });
-        }
-        res.json({
-            status: 'success',
-            message: 'Doação encontrada',
-            data: result.rows[0]
-        });
-        
-    } catch (error) {
-        console.error('Erro ao buscar doação', error);
-        res.status(500).send('Erro ao buscar doação');
-    }
-}
 
 async function createDonation(req, res) {
     try {
@@ -50,6 +33,6 @@ async function createDonation(req, res) {
 
 module.exports = {
     getAllDonations,
-    getDonationById,
+    // getDonationById,
     createDonation
 };
