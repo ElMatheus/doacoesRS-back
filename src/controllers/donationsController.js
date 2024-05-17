@@ -4,7 +4,7 @@ const pool = require('../config/dbConfig');
 
 async function getAllDonations(req, res) {
     try {
-        const result = await pool.query('SELECT * FROM donations INNER JOIN users ON donations.user_id = users.id');
+        const result = await pool.query('SELECT donations.id as donation_id, users.id as user_id, * FROM donations INNER JOIN users ON donations.user_id = users.id');
         res.json({
             status: 'success',
             message: 'Doações encontradas',
