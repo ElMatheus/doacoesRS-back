@@ -43,10 +43,15 @@ CREATE TABLE donations(
 
 {
   "user_id": 1,
-  "donation_date": "2021-10-10",
+  "status": "pendente"
+}
+
+{
+  "user_id": 2,
   "status": "pendente"
 }
 
 \\ users insert SQL :
 
 INSERT INTO users (name, email, password) VALUES ('Teste', 'Teste@gmail.com', 123456789);
+INSERT INTO users (name, email, password) VALUES ('Teste2', 'Teste2@gmail.com' , 123456789);
