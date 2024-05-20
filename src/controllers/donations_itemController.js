@@ -12,8 +12,7 @@ async function getAllDonationsItems(req, res) {
         });
     }
     catch (error) {
-        console.error('Erro ao buscar itens de doações', error);
-        res.status(500).send('Erro ao buscar itens de doações');
+        return res.status(500).send('Erro ao buscar itens de doações');
     }
 }
 
@@ -36,8 +35,7 @@ async function createDonationItem(req, res) {
             donations_items: result.rows[0],
         });
     } catch (error) {
-        console.error('Erro ao criar item de doação', error);
-        res.status(500).send('Erro ao criar item de doação');
+        return res.status(500).send('Erro ao criar item de doação');
     }
 }
 
