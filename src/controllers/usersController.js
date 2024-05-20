@@ -1,5 +1,8 @@
 const pool = require('../config/dbConfig');
 const bcrypt = require('bcrypt');
+const { sign } = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+const dayjs = require('dayjs');
 
 const { hash, compare } = bcrypt;
 
@@ -117,20 +120,44 @@ async function loginUser(req, res) {
     if (!passwordMatch) {
       return res.status(401).send({ message: "Nome ou senha inválidos" });
     }
-    
-    // const token = sign({}, 'ca94e53c-e4e7-422a-9558-f32670cce6a5', {
-    //   subject: user.rows[0].id,
-    //   expiresIn: '15m'
-    // });
-    
-    // const generateRefreshToken = new Refresh(user.id);
-    // const refreshToken = await refreshRepository.createRefreshToken(generateRefreshToken);
-    
-    return res.status(200).send({ user: user.rows[0], token: "token" });
+
+    const token = sign({}, '0f5c405c-a1a3-4ded-814f-d1e4d8d3b814', {
+      subject: user.rows[0].id.toString(),
+      expiresIn: '15m'
+    });
+
+    const expiresIn = dayjs().add(15, 'day').unix();
+
+    const generateRefreshToken = await pool.query('INSERT INTO refresh_tokens (token, expiresIn, user_id) VALUES ($1, $2, $3) RETURNING *', [uuidv4(), expiresIn, user.rows[0].id]);
+
+    return res.status(200).send({ user: user.rows[0], token, refreshToken: generateRefreshToken.rows[0] });
   } catch (error) {
     return res.status(500).send({ message: "Erro ao realizar login", error: error.message });
   }
 };
-    
 
-module.exports = { getAllUsers, getUserById, getUserByName, createUser, updateUser, deleteUser, loginUser };
+async function refreshToken(req, res) {
+  try {
+    const { refreshToken } = req.body;
+
+    const token = await pool.query('SELECT * FROM refresh_tokens WHERE token = $1', [refreshToken]);
+
+    if (!token.rows[0]) {
+      return res.status(404).send({ message: "Token inválido ou expirado" });
+    }
+
+    const newToken = sign({}, '0f5c405c-a1a3-4ded-814f-d1e4d8d3b814', {
+      subject: token.rows[0].token.toString(),
+      expiresIn: '15m'
+    });
+
+    return res.status(200).send({ token: newToken, refreshToken: token.rows[0]});
+  } catch (error) {
+    return res.status(500).send({ message: "Erro ao realizar refresh", error: error.message });
+  }
+};
+
+
+
+
+module.exports = { getAllUsers, getUserById, getUserByName, createUser, updateUser, deleteUser, loginUser, refreshToken };
