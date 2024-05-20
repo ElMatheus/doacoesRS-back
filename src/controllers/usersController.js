@@ -49,7 +49,11 @@ async function getUserByName(req, res) {
 async function createUser(req, res) {
   try {
     const { name, email, password } = req.body;
-    // const passwordHash = await hash(password, 8);
+    const userAlreadyExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (userAlreadyExists.rowCount !== 0) {
+      return res.status(400).json({ message: 'Email já cadastrado' });
+    }
+    const passwordHash = await hash(password, 8);
     const result = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [name, email, passwordHash]);
     return res.json({
       message: "Usuario cadastrado com sucesso",
@@ -65,10 +69,16 @@ async function updateUser(req, res) {
   try {
     const { id } = req.params;
     const { name, email, password } = req.body;
-    const result = await pool.query('UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *', [name, email, password, id]);
-    if (result.rowCount === 0) {
+    const userAlreadyExistsId = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    const userAlreadyExistsEmail = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (userAlreadyExistsId.rowCount === 0) {
       return res.status(404).json({ message: 'Usuario não encontrado' });
     }
+    if (userAlreadyExistsEmail.rowCount !== 0) {
+      return res.status(400).json({ message: 'Email já cadastrado' });
+    }
+    const passwordHash = await hash(password, 8);
+    const result = await pool.query('UPDATE users SET name = $1, email = $2, password = $3 WHERE id = $4 RETURNING *', [name, email, passwordHash, id]);
     return res.json({
       message: "Usuario atualizado com sucesso",
       users: result.rows[0],
@@ -99,12 +109,9 @@ async function loginUser(req, res) {
 
     const user = await pool.query('SELECT * FROM users WHERE name = $1', [name]);
 
-    if (!user) {
+    if (!user.rows[0]) {
       return res.status(404).send({ message: "Usuário não encontrado" });
     }
-
-    console.log(user.rows[0].password);
-
     const passwordMatch = await compare(password, user.rows[0].password);
 
     if (!passwordMatch) {
@@ -119,7 +126,7 @@ async function loginUser(req, res) {
     // const generateRefreshToken = new Refresh(user.id);
     // const refreshToken = await refreshRepository.createRefreshToken(generateRefreshToken);
     
-    return res.status(200).send({ user, token: token, refreshToken });
+    return res.status(200).send({ user: user.rows[0], token: "token" });
   } catch (error) {
     return res.status(500).send({ message: "Erro ao realizar login", error: error.message });
   }
