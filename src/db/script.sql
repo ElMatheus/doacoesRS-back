@@ -5,8 +5,15 @@ CREATE DATABASE donates;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE refresh_tokens (
+    token VARCHAR(36) PRIMARY KEY,
+    expiresIn INT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE products (
