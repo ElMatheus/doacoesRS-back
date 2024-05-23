@@ -49,6 +49,20 @@ async function getUserByName(req, res) {
   }
 }
 
+async function getUserByEmail(req, res) {
+  try {
+    const { email } = req.params;
+    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Usuario não encontrado' });
+    }
+    return res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Erro ao buscar usuario', error);
+    res.status(500).send('Erro ao buscar usuario');
+  }
+}
+
 async function createUser(req, res) {
   try {
     const { name, email, password } = req.body;
@@ -151,7 +165,7 @@ async function refreshToken(req, res) {
       expiresIn: '15m'
     });
 
-    return res.status(200).send({ token: newToken, refreshToken: token.rows[0]});
+    return res.status(200).send({ token: newToken, refreshToken: token.rows[0] });
   } catch (error) {
     return res.status(500).send({ message: "Erro ao realizar refresh", error: error.message });
   }
@@ -160,4 +174,4 @@ async function refreshToken(req, res) {
 
 
 
-module.exports = { getAllUsers, getUserById, getUserByName, createUser, updateUser, deleteUser, loginUser, refreshToken };
+module.exports = { getAllUsers, getUserById, getUserByName, getUserByEmail, createUser, updateUser, deleteUser, loginUser, refreshToken };
