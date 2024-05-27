@@ -92,3 +92,97 @@ INSERT INTO users (name, email, password) VALUES ('Teste2', 'Teste2@gmail.com' ,
   "product_id": 1,
   "quantity": 10
 }
+
+\\ produtos do figma para o insomina :
+
+pet 
+
+{
+  type: "pet",
+  name: "Ração Adulto",
+  value: 80.00,
+  description: "Ração para cachorro",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "pet",
+  name: "Ração Filhote",
+  value: 80.00,
+  description: "Ração para cachorro filhote",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+alimentos
+
+{
+  type: "food",
+  name: "Feijao 2kg",
+  value: 24.00,
+  description: "Feijao para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "food",
+  name: "Arroz 2kg",
+  value: 10.00,
+  description: "Arroz para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+roupas
+
+{
+  type: "clothes",
+  name: "Tênis/Calçado",
+  value: 140.00,
+  description: "Tênis para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "clothes",
+  name: "Camiseta",
+  value: 40.00,
+  description: "Camiseta para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+higiene
+
+{
+  type: "hygiene",
+  name: "Sabonete",
+  value: 5.00,
+  description: "Sabonete para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "hygiene",
+  name: "Shampoo",
+  value: 10.00,
+  description: "Shampoo para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+// agora vamos fazer o insert no banco de dados
+
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('pet', 'Ração Adulto', 80.00, 'Ração para cachorro', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Feijao 2kg', 24.00, 'Feijao para doação', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Arroz 2kg', 10.00, 'Arroz para doação', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Tênis/Calçado', 140.00, 'Tênis para doação', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Camiseta', 40.00, 'Camiseta para doação', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('hygiene', 'Sabonete', 5.00, 'Sabonete para doação', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('hygiene', 'Shampoo', 10.00, 'Shampoo para doação', 400, 150);
+
