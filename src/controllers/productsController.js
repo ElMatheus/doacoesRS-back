@@ -34,8 +34,8 @@ async function getProductById(req, res) {
 
 async function createProduct(req, res) {
     try {
-        const {type, name, value, description, target_quantity, current_quantity} = req.body;
-        const result = await pool.query('INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [type, name, value, description, target_quantity, current_quantity]);
+        const {type, name, value, description, target_quantity, current_quantity, image} = req.body;
+        const result = await pool.query('INSERT INTO products (type, name, value, description, target_quantity, current_quantity, image) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [type, name, value, description, target_quantity, current_quantity, image]);
         res.json({
             message: "Produto cadastrado com sucesso",
             products: result.rows[0],
@@ -84,8 +84,8 @@ async function getProductByType(req, res) {
 async function updateProduct(req, res) {
     try {
         const { id } = req.params;
-        const { type, name, value, description, target_quantity, current_quantity } = req.body;
-        const result = await pool.query('UPDATE products SET type = $1, name = $2, value = $3, description = $4, target_quantity = $5, current_quantity = $6 WHERE id = $7 RETURNING *', [type, name, value, description, target_quantity, current_quantity, id]);
+        const { type, name, value, description, target_quantity, current_quantity, image } = req.body;
+        const result = await pool.query('UPDATE products SET type = $1, name = $2, value = $3, description = $4, target_quantity = $5, current_quantity = $6, image = $7 WHERE id = $8 RETURNING *', [type, name, value, description, target_quantity, current_quantity, image,id]);
         if (result.rowCount == 0) {
            return res.status(404).json({ message: 'Produto não encontrado' });
         }

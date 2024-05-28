@@ -23,7 +23,8 @@ CREATE TABLE products (
     value DECIMAL(10, 2) NOT NULL,
     description TEXT NOT NULL,
     target_quantity INT NOT NULL,
-    current_quantity INT NOT NULL
+    current_quantity INT NOT NULL,
+    image VARCHAR(255)
 );
 
 CREATE TABLE donations(
