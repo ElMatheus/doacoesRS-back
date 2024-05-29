@@ -199,3 +199,4 @@ INSERT INTO products (type, name, value, description, image, target_quantity, cu
 -- INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('hygiene', 'Sabonete', 5.00, 'Sabonete para doação', 400, 150);
 -- INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('hygiene', 'Shampoo', 10.00, 'Shampoo para doação', 400, 150);
 
+INSERT INTO products (type, name, value, description, image,target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote','https://i.imgur.com/WrM6oqo.png',800, 150);
