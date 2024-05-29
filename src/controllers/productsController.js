@@ -133,5 +133,6 @@ module.exports = {
     getProductByName,
     getProductByType,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    getGoalOfTypesProducts
 };
