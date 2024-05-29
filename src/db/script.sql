@@ -109,6 +109,7 @@ pet
   name: "Ração Adulto",
   value: 80.00,
   description: "Ração para cachorro",
+  image: "https://i.imgur.com/5QOvDoQ.png",
   target_quantity: 400,
   current_quantity: 150
 }
@@ -118,6 +119,7 @@ pet
   name: "Ração Filhote",
   value: 80.00,
   description: "Ração para cachorro filhote",
+  image: "https://i.imgur.com/WrM6oqo.png",
   target_quantity: 400,
   current_quantity: 150
 }
@@ -129,6 +131,7 @@ alimentos
   name: "Feijao 2kg",
   value: 24.00,
   description: "Feijao para doação",
+  image: "https://i.imgur.com/i8fg3kF.png",
   target_quantity: 400,
   current_quantity: 150
 }
@@ -138,6 +141,7 @@ alimentos
   name: "Arroz 2kg",
   value: 10.00,
   description: "Arroz para doação",
+  image: "https://i.imgur.com/NKZXMJX.png",
   target_quantity: 400,
   current_quantity: 150
 }
@@ -149,6 +153,7 @@ roupas
   name: "Tênis/Calçado",
   value: 140.00,
   description: "Tênis para doação",
+  image: "https://i.imgur.com/VidyIzQ.png",
   target_quantity: 400,
   current_quantity: 150
 }
@@ -158,6 +163,7 @@ roupas
   name: "Camiseta",
   value: 40.00,
   description: "Camiseta para doação",
+  image: "https://i.imgur.com/OXN41lb.png",
   target_quantity: 400,
   current_quantity: 150
 }
@@ -184,12 +190,12 @@ higiene
 
 // agora vamos fazer o insert no banco de dados
 
-INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('pet', 'Ração Adulto', 80.00, 'Ração para cachorro', 400, 150);
-INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote', 400, 150);
-INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Feijao 2kg', 24.00, 'Feijao para doação', 400, 150);
-INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Arroz 2kg', 10.00, 'Arroz para doação', 400, 150);
-INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Tênis/Calçado', 140.00, 'Tênis para doação', 400, 150);
-INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Camiseta', 40.00, 'Camiseta para doação', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('pet', 'Ração Adulto', 80.00, 'Ração para cachorro','https://i.imgur.com/5QOvDoQ.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote','https://i.imgur.com/WrM6oqo.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Feijao 2kg', 24.00, 'Feijao para doação','https://i.imgur.com/i8fg3kF.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Arroz 2kg', 10.00, 'Arroz para doação','https://i.imgur.com/NKZXMJX.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Tênis/Calçado', 140.00, 'Tênis para doação','https://i.imgur.com/VidyIzQ.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Camiseta', 40.00, 'Camiseta para doação','https://i.imgur.com/OXN41lb.png',400, 150);
 INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('hygiene', 'Sabonete', 5.00, 'Sabonete para doação', 400, 150);
 INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('hygiene', 'Shampoo', 10.00, 'Shampoo para doação', 400, 150);
 
