@@ -23,7 +23,8 @@ CREATE TABLE products (
     value DECIMAL(10, 2) NOT NULL,
     description TEXT NOT NULL,
     target_quantity INT NOT NULL,
-    current_quantity INT NOT NULL
+    current_quantity INT NOT NULL,
+    image VARCHAR(255)
 );
 
 CREATE TABLE donations(
@@ -43,16 +44,11 @@ CREATE TABLE donations_items(
   FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
-
-CREATE TABLE gift(
-  id SERIAL PRIMARY KEY,
-  donation_id INT NOT NULL,
-  product_id INT NOT NULL,
-  quantity INT NOT NULL,
-  local VARCHAR(255) NOT NULL,
-  FOREIGN KEY (donation_id) REFERENCES donations(id),
-  FOREIGN KEY (product_id) REFERENCES products(id)
-);
+DROP TABLE donations_items;
+DROP TABLE donations;
+DROP TABLE products;
+DROP TABLE refresh_tokens;
+DROP TABLE users;
 
 \\users insomina : 
 
@@ -103,3 +99,103 @@ INSERT INTO users (name, email, password) VALUES ('Teste2', 'Teste2@gmail.com' ,
   "product_id": 1,
   "quantity": 10
 }
+
+\\ produtos do figma para o insomina :
+
+pet 
+
+{
+  type: "pet",
+  name: "Ração Adulto",
+  value: 80.00,
+  description: "Ração para cachorro",
+  image: "https://i.imgur.com/5QOvDoQ.png",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "pet",
+  name: "Ração Filhote",
+  value: 80.00,
+  description: "Ração para cachorro filhote",
+  image: "https://i.imgur.com/WrM6oqo.png",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+alimentos
+
+{
+  type: "food",
+  name: "Feijao 2kg",
+  value: 24.00,
+  description: "Feijao para doação",
+  image: "https://i.imgur.com/i8fg3kF.png",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "food",
+  name: "Arroz 2kg",
+  value: 10.00,
+  description: "Arroz para doação",
+  image: "https://i.imgur.com/NKZXMJX.png",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+roupas
+
+{
+  type: "clothes",
+  name: "Tênis/Calçado",
+  value: 140.00,
+  description: "Tênis para doação",
+  image: "https://i.imgur.com/VidyIzQ.png",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "clothes",
+  name: "Camiseta",
+  value: 40.00,
+  description: "Camiseta para doação",
+  image: "https://i.imgur.com/OXN41lb.png",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+higiene
+
+{
+  type: "hygiene",
+  name: "Sabonete",
+  value: 5.00,
+  description: "Sabonete para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+{
+  type: "hygiene",
+  name: "Shampoo",
+  value: 10.00,
+  description: "Shampoo para doação",
+  target_quantity: 400,
+  current_quantity: 150
+}
+
+// agora vamos fazer o insert no banco de dados
+
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('pet', 'Ração Adulto', 80.00, 'Ração para cachorro','https://i.imgur.com/5QOvDoQ.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote','https://i.imgur.com/WrM6oqo.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Feijao 2kg', 24.00, 'Feijao para doação','https://i.imgur.com/i8fg3kF.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('food', 'Arroz 2kg', 10.00, 'Arroz para doação','https://i.imgur.com/NKZXMJX.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Tênis/Calçado', 140.00, 'Tênis para doação','https://i.imgur.com/VidyIzQ.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('clothes', 'Camiseta', 40.00, 'Camiseta para doação','https://i.imgur.com/OXN41lb.png',400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('hygiene', 'Sabonete', 5.00, 'Sabonete para doação', 400, 150);
+INSERT INTO products (type, name, value, description, target_quantity, current_quantity) VALUES ('hygiene', 'Shampoo', 10.00, 'Shampoo para doação', 400, 150);
+

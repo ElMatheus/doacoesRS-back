@@ -53,9 +53,9 @@ async function getUserByEmail(req, res) {
   try {
     const { email } = req.params;
     const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: 'Usuario não encontrado' });
-    }
+    // if (result.rowCount === 0) {
+    //   return res.status(404).json({ message: 'Usuario não encontrado' });
+    // }
     return res.json(result.rows[0]);
   } catch (error) {
     console.error('Erro ao buscar usuario', error);
