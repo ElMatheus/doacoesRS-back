@@ -44,6 +44,18 @@ CREATE TABLE donations_items(
   FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
+CREATE TABLE gift(
+id SERIAL PRIMARY KEY,
+donation_id INT NOT NULL,
+product_id INT NOT NULL,
+quantity INT NOT NULL,
+local VARCHAR(255) NOT NULL,
+FOREIGN KEY (donation_id) REFERENCES donations(id),
+FOREIGN KEY (product_id) REFERENCES products(id)
+ );
+
+
+
 DROP TABLE donations_items;
 DROP TABLE donations;
 DROP TABLE products;
