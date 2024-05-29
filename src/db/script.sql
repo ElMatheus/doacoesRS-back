@@ -44,6 +44,12 @@ CREATE TABLE donations_items(
   FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
+DROP TABLE donations_items;
+DROP TABLE donations;
+DROP TABLE products;
+DROP TABLE refresh_tokens;
+DROP TABLE users;
+
 \\users insomina : 
 
 {
