@@ -4,6 +4,8 @@ const usersRoutes = require('./routes/usersRoutes');
 const productsRoutes = require('./routes/productsRoutes');
 const donationsRoutes = require('./routes/donationsRoutes');
 const donations_itemRoutes = require('./routes/donations_itemRoutes');
+const giftRoutes = require('./routes/giftRoutes');
+
 const cors = require('cors');
 
 const app = express();
@@ -19,6 +21,8 @@ app.use('/', usersRoutes);
 app.use('/', productsRoutes);
 app.use('/', donationsRoutes);
 app.use('/', donations_itemRoutes);
+app.use('/', giftRoutes);
+
 
 app.listen(PORT, () => {
   console.log(`O servidor esta rodando na porta ${PORT}`);
