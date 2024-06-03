@@ -49,15 +49,15 @@ id SERIAL PRIMARY KEY,
 categoria VARCHAR(255) NOT NULL,
 nome_produto VARCHAR(255),
 quantidade INT NOT NULL,
-local_entrega VARCHAR(255) NOT NULL,
-)
+local_entrega VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE gift_item(
 id SERIAL PRIMARY KEY,
 gift_id INT NOT NULL,
 donation_id INT NOT NULL,
-FOREIGN KEY (donation_id) REFERENCES donation(id),
-FOREIGN KEY (gift_id) REFERENCES gift(id),
+FOREIGN KEY (donation_id) REFERENCES donations(id),
+FOREIGN KEY (gift_id) REFERENCES gift(id)
  );
 
 
