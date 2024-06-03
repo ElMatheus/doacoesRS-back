@@ -5,6 +5,7 @@ const productsRoutes = require('./routes/productsRoutes');
 const donationsRoutes = require('./routes/donationsRoutes');
 const donations_itemRoutes = require('./routes/donations_itemRoutes');
 const giftRoutes = require('./routes/giftRoutes');
+const gift_itemRoutes = require('./routes/gift_itemRoutes');
 
 const cors = require('cors');
 
@@ -22,6 +23,7 @@ app.use('/', productsRoutes);
 app.use('/', donationsRoutes);
 app.use('/', donations_itemRoutes);
 app.use('/', giftRoutes);
+app.use('/', gift_itemRoutes);
 
 
 app.listen(PORT, () => {
