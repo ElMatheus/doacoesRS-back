@@ -1,3 +1,4 @@
+const e = require('cors');
 const pool = require('../config/dbConfig');
 
 async function getAllGiftItems(req, res) {
