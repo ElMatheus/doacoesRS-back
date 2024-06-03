@@ -1,8 +1,8 @@
 const pool = require('../config/dbConfig');
 
-async function getAllGifts(req, res) {
+async function getAllGift(req, res) {
   try {
-    const result = await pool.query('SELECT gifts.id as gift_id, users.id as user_id, * FROM gifts INNER JOIN users ON gifts.user_id = users.id');
+    const result = await pool.query('SELECT gift.id as gift_id, users.id as user_id, * FROM gift INNER JOIN users ON gift.user_id = users.id');
     res.json({
       status: 'success',
       message: 'Presentes encontrados',
@@ -16,15 +16,16 @@ async function getAllGifts(req, res) {
 }
 
 async function createGift(req, res) {
-  try {
-    const { user_id, produto_id, quantidade, local } = req.body;
-    const result = await pool.query('INSERT INTO gifts (user_id, produto_id, quantidade, local) VALUES ($1, $2, $3, $4) RETURNING *', [user_id, produto_id, quantidade, local]);
+  try { 
+    const { donation_id, product_id, quantity, local } = req.body;
+    const result = await pool.query('INSERT INTO gift (donation_id, product_id, quantity, local) VALUES ($1, $2, $3, $4) RETURNING *', [donation_id, product_id, quantity, local]);
     res.json({
       message: "Presente criado",
       gift: result.rows[0],
     });
 
   } catch (error) {
+    console.error('Erro ao criar presente', error);
     return res.status(500).send('Erro ao criar presente');
   }
 }
@@ -32,7 +33,7 @@ async function createGift(req, res) {
 async function getGiftById(req, res) {
   try {
     const { id } = req.params;
-    const result = await pool.query('SELECT * FROM gifts WHERE id = $1', [id]);
+    const result = await pool.query('SELECT * FROM gift WHERE id = $1', [id]);
 
     if (result.rowCount == 0) {
       return res.status(404).send('Presente não encontrado');
@@ -52,7 +53,7 @@ async function updateGift(req, res) {
   try {
     const { id } = req.params;
     const { status } = req.body;
-    const result = await pool.query('UPDATE gifts SET status = $1 WHERE id = $2 RETURNING *', [status, id]);
+    const result = await pool.query('UPDATE gift SET status = $1 WHERE id = $2 RETURNING *', [status, id]);
 
     if (result.rowCount == 0) {
       return res.status(404).send('Presente não encontrado');
@@ -71,7 +72,7 @@ async function updateGift(req, res) {
 async function deleteGift(req, res) {
   try {
     const { id } = req.params;
-    const result = await pool.query('DELETE FROM gifts WHERE id = $1', [id]);
+    const result = await pool.query('DELETE FROM gift WHERE id = $1', [id]);
 
     if (result.rowCount == 0) {
       return res.status(404).send('Presente não encontrado');
@@ -88,7 +89,7 @@ async function deleteGift(req, res) {
 
 
 module.exports = {
-  getAllGifts,
+  getAllGift,
   createGift,
   getGiftById,
   updateGift,
