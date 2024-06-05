@@ -71,7 +71,7 @@ DROP TABLE users;
 INSERT INTO users (name, email, password) VALUES ('Teste', 'Teste@gmail.com', 123456789);
 INSERT INTO users (name, email, password) VALUES ('Teste2', 'Teste2@gmail.com' , 123456789);
 
-// agora vamos fazer o insert no banco de dados
+-- agora vamos fazer o insert no banco de dados
 
 INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('pet', 'Ração Adulto', 80.00, 'Ração para cachorro','https://i.imgur.com/5QOvDoQ.png',400, 150);
 INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote','https://i.imgur.com/WrM6oqo.png',400, 150);
