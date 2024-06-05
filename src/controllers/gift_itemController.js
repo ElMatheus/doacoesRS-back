@@ -87,6 +87,26 @@ async function deleteGiftItem(req, res) {
     return res.status(500).send('Erro ao deletar item de presente');
   }
 }
+//pegar usuario pelo inner no gift_item
+//pegar usuario pelo inner no gift_item
+async function getGiftItemByUser(req, res) {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('SELECT gift_item.id, gift_item.gift_id, gift_item.donation_id, gift.name as gift_name, donations.donation_date, users.name as user_name FROM gift_item INNER JOIN gift ON gift_item.gift_id = gift.id INNER JOIN donations ON gift_item.donation_id = donations.id INNER JOIN users ON donations.user_id = users.id WHERE users.id = $1', [id]);
+
+    if (result.rowCount == 0) {
+      return res.status(404).send('Item de presente não encontrado');
+    }
+
+    res.json({
+      message: "Item de presente encontrado",
+      gift_item: result.rows[0],
+    });
+
+  } catch (error) {
+    return res.status(500).send('Erro ao buscar item de presente');
+  }
+}
 
 
 
