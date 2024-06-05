@@ -19,21 +19,13 @@ async function getAllGiftItems(req, res) {
 async function createGiftItem(req, res) {
   try {
     const { gift_id, donation_id } = req.body;
-    const gift = await pool.query('SELECT * FROM gift WHERE id = $1', [gift_id]);
-    const donation = await pool.query('SELECT * FROM donations WHERE id = $1', [donation_id]);
-
-    if (!gift.rows[0]) {
-      return res.status(404).send('Presente não encontrado');
-    }
-    if (!donation.rows[0]) {
-      return res.status(404).send('Doação não encontrada');
-    }
-
     const result = await pool.query('INSERT INTO gift_item (gift_id, donation_id) VALUES ($1, $2) RETURNING *', [gift_id, donation_id]);
+
     res.json({
-      message: "Item de presente cadastrado com sucesso",
+      message: "Item de presente criado",
       gift_item: result.rows[0],
     });
+
   } catch (error) {
     return res.status(500).send('Erro ao criar item de presente');
   }
