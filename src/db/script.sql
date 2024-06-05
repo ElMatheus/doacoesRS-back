@@ -81,3 +81,32 @@ INSERT INTO products (type, name, value, description, image, target_quantity, cu
 INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('clothes', 'Camiseta', 40.00, 'Camiseta para doação','https://i.imgur.com/OXN41lb.png',400, 150);
 INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('hygiene', 'Sabonete', 5.00, 'Sabonete para doação', 'https://i.imgur.com/9hrqWQn.jpeg', 400, 150);
 INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('hygiene', 'Shampoo', 10.00, 'Shampoo para doação', 'https://i.imgur.com/944WOut.png',400, 150);
+
+
+
+
+
+
+
+-- Para a tabela users
+INSERT INTO users (name, email, password) VALUES ('Teste', 'Teste@gmail.com', '123456789');
+INSERT INTO users (name, email, password) VALUES ('Teste2', 'Teste2@gmail.com' , '123456789');
+
+-- Para a tabela products
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('pet', 'Ração Adulto', 80.00, 'Ração para cachorro', 'https://i.imgur.com/5QOvDoQ.png', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('pet', 'Ração Filhote', 80.00, 'Ração para cachorro filhote', 'https://i.imgur.com/WrM6oqo.png', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('food', 'Feijao 2kg', 24.00, 'Feijao para doação', 'https://i.imgur.com/i8fg3kF.png', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('food', 'Arroz 2kg', 10.00, 'Arroz para doação', 'https://i.imgur.com/NKZXMJX.png', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('clothes', 'Tênis/Calçado', 140.00, 'Tênis para doação', 'https://i.imgur.com/VidyIzQ.png', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('clothes', 'Camiseta', 40.00, 'Camiseta para doação', 'https://i.imgur.com/OXN41lb.png', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('hygiene', 'Sabonete', 5.00, 'Sabonete para doação', 'https://i.imgur.com/9hrqWQn.jpeg', 400, 150);
+INSERT INTO products (type, name, value, description, image, target_quantity, current_quantity) VALUES ('hygiene', 'Shampoo', 10.00, 'Shampoo para doação', 'https://i.imgur.com/944WOut.png', 400, 150);
+
+-- Para a tabela donations
+INSERT INTO donations (user_id, donation_date, status) VALUES (1, '2024-06-05', 'Pendente');
+INSERT INTO donations (user_id, donation_date, status) VALUES (2, '2024-06-05', 'Pendente');
+
+-- Para a tabela donations_items
+INSERT INTO donations_items (donation_id, product_id, quantity) VALUES (1, 1, 2);
+INSERT INTO donations_items (donation_id, product_id, quantity) VALUES (1, 3, 1);
+INSERT INTO donations_items (donation_id, product_id, quantity) VALUES (2, 2, 3);
