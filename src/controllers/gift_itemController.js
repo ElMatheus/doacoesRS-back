@@ -1,18 +1,17 @@
 const e = require('cors');
 const pool = require('../config/dbConfig');
 
+
 async function getAllGiftItems(req, res) {
   try {
-    const result = await pool.query('SELECT gift_item.id, gift_item.gift_id, gift_item.donation_id, gift.name as gift_name, donations.donation_date, users.name as user_name FROM gift_item INNER JOIN gift ON gift_item.gift_id = gift.id INNER JOIN donations ON gift_item.donation_id = donations.id INNER JOIN users ON donations.user_id = users.id');
+    const result = await pool.query('SELECT * FROM gift_item');
     res.json({
-      status: 'success',
-      message: 'Itens de presentes encontrados',
-      total: result.rowCount,
-      data: result.rows
+      message: "Todos os itens de presente",
+      gift_items: result.rows,
     });
-  }
-  catch (error) {
-    return res.status(500).send('Erro ao buscar itens de presentes');
+
+  } catch (error) {
+    return res.status(500).send('Erro ao buscar itens de presente');
   }
 }
 
