@@ -46,11 +46,23 @@ CREATE TABLE donations_items(
 
 CREATE TABLE gift(
 id SERIAL PRIMARY KEY,
-categoria VARCHAR(255) NOT NULL,
-nome_produto VARCHAR(255),
-quantidade INT NOT NULL,
+type VARCHAR(255) NOT NULL,
+name VARCHAR(255) NOT NULL,
+description TEXT,
+image VARCHAR(255),
 local_entrega VARCHAR(255) NOT NULL
 );
+
+// faça um insert na tabela gift no insominia 
+
+{
+    "type": "clothes",
+    "name": "Camiseta",
+    "description": "Camiseta para doação",
+    "image": "https://i.imgur.com/OXN41lb.png",
+    "local_entrega": "Rua 1, 123"
+}
+
 
 CREATE TABLE gift_item(
 id SERIAL PRIMARY KEY,
