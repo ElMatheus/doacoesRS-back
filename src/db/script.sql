@@ -30,7 +30,7 @@ CREATE TABLE products (
 CREATE TABLE donations(
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    donation_date DATE NOT NULL,
+    donation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -67,6 +67,8 @@ DROP TABLE donations;
 DROP TABLE products;
 DROP TABLE refresh_tokens;
 DROP TABLE users;
+DROP TABLE gift_item;
+DROP TABLE gift;
 
 INSERT INTO users (name, email, password) VALUES ('Teste', 'Teste@gmail.com', 123456789);
 INSERT INTO users (name, email, password) VALUES ('Teste2', 'Teste2@gmail.com' , 123456789);
