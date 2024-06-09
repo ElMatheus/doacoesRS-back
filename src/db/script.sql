@@ -46,6 +46,7 @@ CREATE TABLE donations_items(
 
 CREATE TABLE gift(
 id SERIAL PRIMARY KEY,
+product_choiceID INT,
 type VARCHAR(255) NOT NULL,
 name VARCHAR(255) NOT NULL,
 description TEXT,
