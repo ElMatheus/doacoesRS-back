@@ -56,9 +56,10 @@ CREATE TABLE gift_item(
 id SERIAL PRIMARY KEY,
 gift_id INT NOT NULL,
 donation_id INT NOT NULL,
+quantity INT NOT NULL,
 FOREIGN KEY (donation_id) REFERENCES donations(id),
 FOREIGN KEY (gift_id) REFERENCES gift(id)
- );
+);
 
 
 
