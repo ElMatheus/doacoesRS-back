@@ -5,6 +5,7 @@ const giftController = require('../controllers/giftController');
 router.get('/gift', giftController.getAllGift);
 router.get('/gift/:id', giftController.getGiftById);
 router.post('/gift', giftController.createGift);
+router.get('/gift/product_choiceID/:product_choiceID', giftController.getGiftByProduct_choiceID);
 router.put('/gift/:id', giftController.updateGift);
 router.delete('/gift/:id', giftController.deleteGift);
 

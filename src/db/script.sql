@@ -66,7 +66,7 @@ FOREIGN KEY (gift_id) REFERENCES gift(id)
 // faça um insert na tabela gift no insominia 
 
 {
-    product_choiceID: 1,
+    "product_choiceID": 1,
     "type": "pet",
     "name": "Ração Adulto",
     "description": "Ração para cachorro",
