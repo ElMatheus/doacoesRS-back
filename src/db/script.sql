@@ -49,8 +49,7 @@ id SERIAL PRIMARY KEY,
 type VARCHAR(255) NOT NULL,
 name VARCHAR(255) NOT NULL,
 description TEXT,
-image VARCHAR(255),
-local_entrega VARCHAR(255) NOT NULL
+image VARCHAR(255)
 );
 
 // faça um insert na tabela gift no insominia 
@@ -59,8 +58,8 @@ local_entrega VARCHAR(255) NOT NULL
     "type": "clothes",
     "name": "Camiseta",
     "description": "Camiseta para doação",
-    "image": "https://i.imgur.com/OXN41lb.png",
-    "local_entrega": "Rua 1, 123"
+    "image": "https://i.imgur.com/OXN41lb.png"
+
 }
 
 
@@ -69,6 +68,7 @@ id SERIAL PRIMARY KEY,
 gift_id INT NOT NULL,
 donation_id INT NOT NULL,
 quantity INT NOT NULL,
+delivery_place VARCHAR(255) NOT NULL,
 FOREIGN KEY (donation_id) REFERENCES donations(id),
 FOREIGN KEY (gift_id) REFERENCES gift(id)
 );

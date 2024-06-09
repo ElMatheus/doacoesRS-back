@@ -18,8 +18,8 @@ async function getAllGift(req, res) {
 
 async function createGift(req, res) {
   try {
-    const { type, name, description, image, local_entrega } = req.body;
-    const result = await pool.query('INSERT INTO gift (type, name, description, image, local_entrega) VALUES ($1, $2, $3, $4, $5) RETURNING *', [type, name, description, image, local_entrega]);
+    const { type, name, description, image } = req.body;
+    const result = await pool.query('INSERT INTO gift (type, name, description, image) VALUES ($1, $2, $3, $4) RETURNING *', [type, name, description, image]);
     res.json({
       message: "Presente cadastrado com sucesso",
       gift: result.rows[0],

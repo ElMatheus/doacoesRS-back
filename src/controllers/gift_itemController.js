@@ -17,8 +17,8 @@ async function getAllGiftItems(req, res) {
 
 async function createGiftItem(req, res) {
   try {
-    const { gift_id, donation_id, quantity } = req.body;
-    const result = await pool.query('INSERT INTO gift_item (gift_id, donation_id, quantity) VALUES ($1, $2, $3) RETURNING *', [gift_id, donation_id, quantity]);
+    const { gift_id, donation_id, quantity, delivery_place } = req.body;
+    const result = await pool.query('INSERT INTO gift_item (gift_id, donation_id, quantity, delivery_place) VALUES ($1, $2, $3, $4) RETURNING *', [gift_id, donation_id, quantity, delivery_place]);
 
     res.json({
       message: "Item de presente criado",
