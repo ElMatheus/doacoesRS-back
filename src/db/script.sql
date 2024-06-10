@@ -52,15 +52,6 @@ description TEXT,
 image VARCHAR(255)
 );
 
-// faça um insert na tabela gift no insominia 
-
-{
-    "type": "clothes",
-    "name": "Camiseta",
-    "description": "Camiseta para doação",
-    "image": "https://i.imgur.com/OXN41lb.png"
-
-}
 
 
 CREATE TABLE gift_item(
@@ -73,6 +64,15 @@ FOREIGN KEY (donation_id) REFERENCES donations(id),
 FOREIGN KEY (gift_id) REFERENCES gift(id)
 );
 
+// faça um insert na tabela gift no insominia 
+
+{
+    "type": "clothes",
+    "name": "Camiseta",
+    "description": "Camiseta para doação",
+    "image": "https://i.imgur.com/OXN41lb.png"
+
+}
 
 
 DROP TABLE donations_items;
