@@ -3,6 +3,7 @@ const router = express.Router();
 const donationsController = require('../controllers/donationsController');
 
 router.get('/donations', donationsController.getAllDonations);
+router.get('/donations/user/:id', donationsController.getDonationsByUserId);
 router.get('/donations/:id', donationsController.getDonationById);
 router.post('/donations', donationsController.createDonation);
 router.put('/donations/:id', donationsController.updateDonation);
