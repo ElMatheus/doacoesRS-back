@@ -28,13 +28,18 @@ async function getDonationsByUserId(req, res) {
                 users.name AS user_name, 
                 users.email AS user_email, 
                 donations.donation_date,
-                donations.status AS donation_status
+                donations.status AS donation_status,
+                products.name AS product_name,
+                products.image AS product_image,
+                products.value AS value
             FROM 
                 donations 
             INNER JOIN 
                 donations_items ON donations.id = donations_items.donation_id 
             INNER JOIN 
                 users ON donations.user_id = users.id 
+            INNER JOIN
+                products ON donations_items.product_id = products.id
             WHERE 
                 users.id = $1
         `, [id]);
