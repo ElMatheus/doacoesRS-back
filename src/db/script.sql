@@ -46,10 +46,10 @@ CREATE TABLE donations_items(
 
 CREATE TABLE gift(
 id SERIAL PRIMARY KEY,
-categoria VARCHAR(255) NOT NULL,
-nome_produto VARCHAR(255),
-quantidade INT NOT NULL,
-local_entrega VARCHAR(255) NOT NULL
+type VARCHAR(255) NOT NULL,
+name VARCHAR(255) NOT NULL,
+description TEXT,
+image VARCHAR(255)
 );
 
 CREATE TABLE gift_item(
@@ -57,9 +57,24 @@ id SERIAL PRIMARY KEY,
 gift_id INT NOT NULL,
 donation_id INT NOT NULL,
 quantity INT NOT NULL,
+delivery_place VARCHAR(255) NOT NULL,
 FOREIGN KEY (donation_id) REFERENCES donations(id),
 FOREIGN KEY (gift_id) REFERENCES gift(id)
 );
+
+// faça um insert na tabela gift no insominia 
+
+{
+    "product_choiceID": 1,
+    "type": "pet",
+    "name": "Ração Adulto",
+    "description": "Ração para cachorro",
+    "image": "https://i.imgur.com/5QOvDoQ.png"
+}
+
+
+
+
 
 
 
