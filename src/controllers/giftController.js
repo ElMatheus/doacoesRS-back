@@ -19,7 +19,7 @@ async function getAllGift(req, res) {
 async function createGift(req, res) {
   try {
     const { type, name, description, image } = req.body;
-    const result = await pool.query('INSERT INTO gift (type, name, description, image) VALUES ($1, $2, $3, $4) RETURNING *', [type, name, description, image]);
+    const result = await pool.query('INSERT INTO gift ( type, name, description, image) VALUES ($1, $2, $3, $4) RETURNING *', [type, name, description, image]);
     res.json({
       message: "Presente cadastrado com sucesso",
       gift: result.rows[0],
@@ -29,6 +29,25 @@ async function createGift(req, res) {
     return res.status(500).send('Erro ao criar presente');
   }
 }
+
+// async function getGiftByroduct_choiceID(req, res) {
+//   try {
+//     const { product_choiceID } = req.params;
+//     const result = await pool.query('SELECT * FROM gift WHERE product_choiceID = $1', [product_choiceID]);
+
+//     if (result.rowCount == 0) {
+//       return res.status(404).send('Presente não encontrado');
+//     }
+
+//     res.json({
+//       message: "Presente encontrado",
+//       gift: result.rows[0],
+//     });
+
+//   } catch (error) {
+//     return res.status(500).send('Erro ao buscar presente');
+//   }
+// }
 
 async function getGiftById(req, res) {
   try {
